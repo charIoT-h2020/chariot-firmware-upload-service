@@ -11,15 +11,15 @@ class FirmwareUploader():
 
     def do(self, filename, options):
         url = options['hostname']
-        username = options['username']
-        password = options['password']
+        username = options['username'] or ''
+        password = options['password'] or ''
         upload_path = options['upload_path']
 
         path = os.path.join(self.storage_path, filename)
         remotefile = os.path.join(upload_path, filename)
         
         with ftplib.FTP(url) as ftp:
-            ftp.login()
+            ftp.login(username, password)
 
             with open(path, "rb") as f:
                 try:
