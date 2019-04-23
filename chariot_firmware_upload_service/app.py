@@ -24,9 +24,6 @@ options_tracer = opts.tracer
 # Resources are represented by long-lived class instances
 store = FirmwareStore('upload')
 uploader = FirmwareUploader({
-    'hostname': '192.168.2.32', 
-    'username': '', 
-    'password': '',
     'storage_path': 'upload'
 })
 
