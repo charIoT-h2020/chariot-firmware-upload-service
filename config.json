@@ -1,0 +1,42 @@
+{
+    "tracer": {
+        "host": "192.168.2.24",
+        "enabled": true,
+        "port": 5775,
+        "service": "alert-service"
+    },
+    "logging": {
+        "version": 1,
+        "handlers": {            
+            "console": {
+                "class": "logging.StreamHandler",
+                "formatter": "console"
+            }
+        },
+        "loggers": {
+            "chariot_northbound_alerts": {
+                "level": "INFO",
+                "handlers": [
+                    "console"
+                ]
+            }
+        },
+        "root": {
+            "level": "DEBUG",
+            "handlers": [
+                "console"
+            ]
+        },
+        "formatters": {
+            "file": {
+                "format": "%(asctime)s (%(levelname)s) %(name)s : %(message)s"
+            },
+            "console": {
+                "format": "%(levelname)s: %(message)s"
+            },
+            "debug": {
+                "format": "%(asctime)s (%(levelname)s) %(name)s : %(message)s"
+            }
+        }
+    }
+}
