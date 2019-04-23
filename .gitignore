@@ -121,4 +121,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-upload
+upload/*.bin
