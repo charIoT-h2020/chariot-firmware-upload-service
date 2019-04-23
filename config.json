@@ -3,7 +3,7 @@
         "host": "192.168.2.24",
         "enabled": true,
         "port": 5775,
-        "service": "alert-service"
+        "service": "firmware-service"
     },
     "logging": {
         "version": 1,
