@@ -36,9 +36,10 @@ class FirmwareResource(Traceable):
 
         if status is True:
             resp.status = falcon.HTTP_201
-            resp.body = json.dumps({'status': 0}, ensure_ascii=False)
         else:
             resp.status = falcon.HTTP_500
-            resp.body = json.dumps({'status': 1}, ensure_ascii=False)
+
+        resp.body = json.dumps({'status': status}, ensure_ascii=False)
+        resp.content_type = falcon.MEDIA_JSON
 
         self.close_span(span)
