@@ -25,18 +25,18 @@ class FirmwareUploader():
                 with open(path, 'rb') as f:
                     try:
                         ftp.storbinary('STOR ' + remotefile, f, 1024)
-                        return True
+                        return True, None
                     except ftplib.all_errors as e:
                         if e.args[0][:3] == '550':
                             logging.debug('Remote file not exist error caught: ' + remotefile)
                             ftp.mkd(upload_path)
                             self.do(filename, options)
                         else:
-                            return False
+                            return False, None
         except ftplib.all_errors as e:
             logging.debug('%s, %s, %s' % (url, username, password))
             logging.error(e)
-            return e
+            return False, e
 
 class FirmwareStore():
 
