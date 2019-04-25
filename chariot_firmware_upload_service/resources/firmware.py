@@ -27,12 +27,14 @@ class FirmwareResource(Traceable):
         upload_path = req.get_param('upload_path')
 
         name = self._firmware_store.save(fileStorage, version)
+        logging.info('File is saved')
         status, ex = self._uploader.do(name, {
             'hostname': hostname,
             'username': username,
             'password': password,
             'upload_path': upload_path
         })
+        logging.info('File is uploaded')
 
         if status is True:
             resp.status = falcon.HTTP_201

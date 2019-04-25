@@ -17,7 +17,7 @@ class FirmwareUploader():
 
         path = os.path.join(self.storage_path, filename)
         remotefile = os.path.join(upload_path, filename)
-        
+
         try:
             with ftplib.FTP(url) as ftp:
                 ftp.login(username, password)
@@ -32,7 +32,8 @@ class FirmwareUploader():
                             ftp.mkd(upload_path)
                             self.do(filename, options)
                         else:
-                            return False, None
+                            logging.error(e)
+                            return False, e
         except ftplib.all_errors as e:
             logging.debug('%s, %s, %s' % (url, username, password))
             logging.error(e)
@@ -53,8 +54,8 @@ class FirmwareStore():
         
         try:
             name = '{filename}{ext}'.format(filename=filename, version=version, ext=file_extension)
-            logging.info('Saving at {name}...'.format(name=name))
             firmware_path = os.path.join(self._storage_path, name)
+            logging.info('Saving at {name}...'.format(name=firmware_path))
 
             with self._fopen(firmware_path, 'wb') as firmware_file:
                 while True:
@@ -65,4 +66,5 @@ class FirmwareStore():
 
             return name
         except Exception as ex:
-            logging.debug(ex)
+            logging.info(ex)
+            return None
