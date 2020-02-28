@@ -1,4 +1,5 @@
-# Let's get this party started!
+import logging
+
 import falcon
 import falcon_jsonify
 from falcon_multipart.middleware import MultipartMiddleware
@@ -30,8 +31,9 @@ uploader = FirmwareUploader({
 
 firmware = FirmwareResource(store, uploader)
 
-if options_tracer['enabled']:
+if options_tracer['enabled'] is True:
     options_tracer['service'] = __service_name__
+    logging.info(f'Enabling tracing for service "{__service_name__}"')
     tracer = Tracer(options_tracer)
     tracer.init_tracer()
     firmware.inject_tracer(tracer)
