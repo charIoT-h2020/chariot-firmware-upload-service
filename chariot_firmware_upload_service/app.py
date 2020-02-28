@@ -1,13 +1,14 @@
 # Let's get this party started!
 import falcon
 import falcon_jsonify
-
-from chariot_base.utilities import open_config_file
 from falcon_multipart.middleware import MultipartMiddleware
 
 from chariot_base.utilities import Tracer
-from chariot_firmware_upload_service.store import FirmwareStore, FirmwareUploader
+from chariot_base.utilities import open_config_file
+from chariot_firmware_upload_service import __service_name__
 from chariot_firmware_upload_service.resources import FirmwareResource
+from chariot_firmware_upload_service.store import FirmwareStore, FirmwareUploader
+
 from wsgiref import simple_server
 
 # falcon.API instances are callable WSGI apps
@@ -30,6 +31,7 @@ uploader = FirmwareUploader({
 firmware = FirmwareResource(store, uploader)
 
 if options_tracer['enabled']:
+    options_tracer['service'] = __service_name__
     tracer = Tracer(options_tracer)
     tracer.init_tracer()
     firmware.inject_tracer(tracer)

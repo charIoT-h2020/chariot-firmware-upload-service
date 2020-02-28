@@ -1,9 +1,8 @@
 {
     "tracer": {
-        "host": "192.168.2.24",
+        "host": "localhost",
         "enabled": true,
-        "port": 5775,
-        "service": "firmware-service"
+        "port": 5775
     },
     "logging": {
         "version": 1,
